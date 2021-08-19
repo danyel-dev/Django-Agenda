@@ -12,9 +12,9 @@ class Categoria(models.Model):
 class Contato(models.Model):
     categoria_contato = models.ForeignKey(Categoria, on_delete=models.DO_NOTHING, verbose_name='Categoria')
 
-    nome_contato = models.CharField(max_length=255, verbose_name='Nome')
+    nome_contato = models.CharField(max_length=100, verbose_name='Nome')
     
-    sobrenome_contato = models.CharField(max_length=255, blank=True, verbose_name='Sobrenome')
+    sobrenome_contato = models.CharField(max_length=100, verbose_name='Sobrenome')
     
     telefone_contato = models.CharField(max_length=225, verbose_name='Telefone')
     
