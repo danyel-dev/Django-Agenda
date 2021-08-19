@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block 'titulo' %} Detalhes contato {% endblock %}
+
+{% block 'conteudo' %} 
+    {% include 'partials/_header.html' %}
+
+    <div class="container">
+        <h1 class="mt-5">{{ contato.nome_contato }}</h1>
+        
+        <dl>
+            <dt>Id</dt>
+            <dd>{{ contato.id }}</dd>
+        </dl>
+    </div>
+{% endblock %}
