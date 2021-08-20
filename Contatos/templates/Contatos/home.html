@@ -7,11 +7,13 @@
 
     <div class="container" style="margin-top: 60px;">
         <h1>Meus contatos</h1>
+        <hr>
 
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
                     <tr>
+                        <th scope="col">ID</th>
                         <th scope="col">Nome</th>
                         <th scope="col">Sobrenome</th>
                         <th scope="col">Telefone</th>
@@ -22,6 +24,7 @@
                 <tbody>
                     {% for contato in contatos %}
                         <tr>
+                            <td>{{ contato.id }}</td>
                             <td><a href="{% url 'detalhes_contato' contato.id %}" style="text-decoration: none">{{ contato.nome_contato }}</a></td>
                             <td>{{ contato.sobrenome_contato }}</td>
                             <td>{{ contato.telefone_contato }}</td>
@@ -31,5 +34,21 @@
                 </tbody>
             </table>
         </div>
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                {% for page in contatos.paginator.page_range %}
+                    {% if contatos.number == page %}
+                        <li class="page-item active">
+                            <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </nav>
     </div>
 {% endblock %}

@@ -24,6 +24,8 @@ class Contato(models.Model):
 
     descricao_contato = models.TextField(blank=True, verbose_name='Descrição')
 
+    mostrar_contato = models.BooleanField(default=False)
+
 
     def __str__(self):
         return self.nome_contato

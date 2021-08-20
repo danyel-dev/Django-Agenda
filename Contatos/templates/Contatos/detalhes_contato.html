@@ -6,11 +6,31 @@
     {% include 'partials/_header.html' %}
 
     <div class="container">
-        <h1 class="mt-5">{{ contato.nome_contato }}</h1>
+        <h1 class="mt-5">{{ contato.nome_contato }} {{ contato.sobrenome_contato }}</h1>
+        <hr>
         
         <dl>
             <dt>Id</dt>
             <dd>{{ contato.id }}</dd>
+
+            <dt>Telefone</dt>
+            <dd>{{ contato.telefone_contato }}</dd>
+
+            {% if contato.email_contato %}
+                <dt>E-mail</dt>
+                <dd>{{ contato.emai_contato }}</dd>
+            {% endif %}
+
+            <dt>Adicionado em:</dt>
+            <dd>{{ contato.data_criacao_contato }}</dd>
+
+            {% if contato.descricao_contato %}
+                <dt>Descrição</dt>
+                <dd>{{ contato.descricao_contato }}</dd>
+            {% endif %}
+
+            <dt>Categoria</dt>
+            <dd>{{ contato.categoria_contato }}</dd>
         </dl>
     </div>
 {% endblock %}
