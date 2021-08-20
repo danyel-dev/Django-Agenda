@@ -131,3 +131,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+from django.contrib.messages import constants
+
+MESSAGE_TAGS = {
+    constants.ERROR: 'alert alert-danger',
+    constants.DEBUG: 'alert alert-info',
+    constants.INFO: 'alert alert-info',
+    constants.SUCCESS: 'alert alert-success',
+    constants.WARNING: 'alert alert-warning',
+}

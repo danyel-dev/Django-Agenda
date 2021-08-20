@@ -1,8 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, Http404
 from django.core.paginator import Paginator
 from django.db.models import Q, Value
 from django.db.models.functions import Concat
+from django.contrib import messages
 
 from .models import Contato
 
@@ -20,8 +21,10 @@ def home(request):
 def search_contact(request):
     term = request.GET.get('term')
     
-    if term == None:
-        raise Http404()
+    if not term or term is None:
+        messages.add_message(request, messages.ERROR, 'Você deixou o campo em branco, nada encontrado!')
+
+        return redirect('/')
 
     campos = Concat("nome_contato", Value(" "), "sobrenome_contato")
 
@@ -31,6 +34,11 @@ def search_contact(request):
         Q(nome_completo__icontains = term) | Q(telefone_contato__icontains = term),
         mostrar_contato = True
     )
+
+    if not contatos:
+        messages.add_message(request, messages.ERROR, 'Nenhum contato encontrado!')
+
+        return redirect('/')
 
     paginator = Paginator(contatos, 5)
     page = request.GET.get('page')

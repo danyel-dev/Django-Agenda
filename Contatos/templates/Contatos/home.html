@@ -5,17 +5,20 @@
 {% block 'conteudo' %} 
     {% include 'partials/_header.html' %}
 
-    <div class="container" style="margin-top: 60px;">
+    <div class="container" style="margin-top: 40px;">
         <form method="get" action="{% url 'search_contact' %}" style="margin-bottom: 10px;">
             <div class="form-group row">
                 <div class="col-12">
                     <input type="search" class="form-control" name="term"
                     value="{{ request.GET.term }}" placeholder="Digite sua pesquisa">
+                    <br>
+
+                    {% include 'partials/_messages.html' %}
                 </div>
             </div>
         </form>
 
-        <h1>Meus contatos</h1>
+        <h2>Meus contatos</h2>
         <hr>
 
         <div class="table-responsive">
