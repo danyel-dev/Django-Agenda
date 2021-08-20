@@ -9,6 +9,12 @@
         <h1 class="mt-5">{{ contato.nome_contato }} {{ contato.sobrenome_contato }}</h1>
         <hr>
         
+        {% if contato.image_contact %}
+            <p>
+                <img src="{{ contato.image_contact.url }}" style="width: 250px;">
+            </p>
+        {% endif %}
+
         <dl>
             <dt>Id</dt>
             <dd>{{ contato.id }}</dd>
