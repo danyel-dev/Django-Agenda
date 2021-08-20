@@ -20,6 +20,9 @@ def home(request):
 def search_contact(request):
     term = request.GET.get('term')
     
+    if term == None:
+        raise Http404()
+
     campos = Concat("nome_contato", Value(" "), "sobrenome_contato")
 
     contatos = Contato.objects.annotate(
