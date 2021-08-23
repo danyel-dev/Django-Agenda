@@ -2,7 +2,12 @@
 
 {% block 'title' %} Dashboard {% endblock %}
 
-
 {% block 'content' %} 
-    <h1>Dashboard</h1>
+    <div class="container">
+        <h2 class="mb-3 mt-3">{{ user.first_name }} {{ user.last_name }}</h2>
+
+        {% include 'partials/_messages.html' %}
+       
+        <p>seu nome de usuário é: {{ user.username }}</p>
+    </div>
 {% endblock %}
