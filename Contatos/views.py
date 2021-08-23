@@ -15,7 +15,7 @@ def home(request):
     page = request.GET.get('page')
     contatos = paginator.get_page(page)
 
-    return render(request, 'Contatos/home.html', {'contatos': contatos})
+    return render(request, 'contatos/home.html', {'contatos': contatos})
 
 
 def search_contact(request):
@@ -44,7 +44,7 @@ def search_contact(request):
     page = request.GET.get('page')
     contatos = paginator.get_page(page)
 
-    return render(request, 'Contatos/home.html', {'contatos': contatos})
+    return render(request, 'contatos/home.html', {'contatos': contatos})
 
 
 def detalhes_contato(request, id_contato):
@@ -53,4 +53,4 @@ def detalhes_contato(request, id_contato):
     if not contato.mostrar_contato:
         raise Http404()
 
-    return render(request, 'Contatos/detalhes_contato.html', {'contato': contato})
+    return render(request, 'contatos/detalhes_contato.html', {'contato': contato})
