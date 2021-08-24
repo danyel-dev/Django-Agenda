@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block 'title' %} Dashboard {% endblock %}
+{% block 'titulo' %} Dashboard {% endblock %}
 
 {% block 'content' %} 
     <div class="container">
@@ -9,5 +9,14 @@
         {% include 'partials/_messages.html' %}
        
         <p>seu nome de usuário é: {{ user.username }}</p>
+
+        <form method="POST" action="{% url 'dashboard' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <table class="table">
+                {{ form }}
+            </table>
+            <button type="submit" class="btn btn-success">Alterar</button>
+        </form>
     </div>
 {% endblock %}
