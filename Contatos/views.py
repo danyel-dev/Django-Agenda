@@ -11,8 +11,8 @@ from .models import Contato
 
 @login_required(redirect_field_name='login')
 def home(request):
-    contatos = Contato.objects.order_by('-id').filter(mostrar_contato=True)
-
+    contatos = Contato.objects.order_by('-id').filter(mostrar_contato=True, user=request.user)
+  
     paginator = Paginator(contatos, 5)
     page = request.GET.get('page')
     contatos = paginator.get_page(page)
@@ -49,6 +49,7 @@ def search_contact(request):
     return render(request, 'contatos/home.html', {'contatos': contatos})
 
 
+@login_required(redirect_field_name='login')
 def detalhes_contato(request, id_contato):
     contato = get_object_or_404(Contato, id=id_contato)
 

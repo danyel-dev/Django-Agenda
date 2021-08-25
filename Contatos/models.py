@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 
 
 class Categoria(models.Model):
@@ -10,6 +11,8 @@ class Categoria(models.Model):
 
 
 class Contato(models.Model):
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    
     categoria_contato = models.ForeignKey(Categoria, on_delete=models.DO_NOTHING, verbose_name='Categoria')
 
     nome_contato = models.CharField(max_length=100, verbose_name='Nome')

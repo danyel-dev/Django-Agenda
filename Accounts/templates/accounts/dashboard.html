@@ -4,11 +4,11 @@
 
 {% block 'content' %} 
     <div class="container">
-        <h2 class="mb-3 mt-3">{{ user.first_name }} {{ user.last_name }}</h2>
+        <h2 class="mt-3 mb-3">Olá {{ user.first_name }} {{ user.last_name }}</h2>
 
         {% include 'partials/_messages.html' %}
-       
-        <p>seu nome de usuário é: {{ user.username }}</p>
+
+        <p>seu nome de usuário é: {{ request.user.username }}</p>
 
         <form method="POST" action="{% url 'dashboard' %}" enctype="multipart/form-data">
             {% csrf_token %}
@@ -16,7 +16,8 @@
             <table class="table">
                 {{ form }}
             </table>
-            <button type="submit" class="btn btn-success">Alterar</button>
+
+            <button type="submit" class="btn btn-success">Adicionar</button>
         </form>
     </div>
 {% endblock %}

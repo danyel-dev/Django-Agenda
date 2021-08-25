@@ -23,7 +23,7 @@ def login(request):
     auth.login(request, user)
     messages.success(request, 'Você fez login com sucesso!')
 
-    return redirect('dashboard')
+    return redirect('/')
 
 
 def logout(request):
@@ -93,7 +93,10 @@ def dashboard(request):
         form = ContatoForm(request.POST)
         return render(request, 'accounts/dashboard.html', {'form': form})
 
-    form.save()
+    Contato = form.save(commit=False)
+    Contato.user = request.user
+    Contato.save()
+
     messages.success(request, f'{request.POST.get("nome_contato")} agora está salvo na sua agenda!')
 
     return redirect('/')

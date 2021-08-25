@@ -17,47 +17,52 @@
                 </div>
             </div>
         </form>
+        
+        {% if contatos %}
+            <h2>Meus contatos</h2>
+            <hr>
 
-        <h2>Meus contatos</h2>
-        <hr>
-
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Sobrenome</th>
-                        <th scope="col">Telefone</th>
-                        <th scope="col">Categoria</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    {% for contato in contatos %}
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
                         <tr>
-                            <td>{{ contato.id }}</td>
-                            <td><a href="{% url 'detalhes_contato' contato.id %}" style="text-decoration: none">{{ contato.nome_contato }}</a></td>
-                            <td>{{ contato.sobrenome_contato }}</td>
-                            <td>{{ contato.telefone_contato }}</td>
-                            <td>{{ contato.categoria_contato }}</td>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Sobrenome</th>
+                            <th scope="col">Telefone</th>
+                            <th scope="col">Categoria</th>
                         </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+                    </thead>
 
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-                {% for page in contatos.paginator.page_range %}
-                    <li class="page-item {% if contatos.number == page %} active {% endif %}">
-                        <a class="page-link" 
-                            href="?page={{ page }}{% if request.GET.term is not None %}&term={{ request.GET.term }}{% endif %}">
-                            {{ page }}
-                        </a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </nav>
-    </div>
+                    <tbody>
+                        {% for contato in contatos %}
+                            <tr>
+                                <td>{{ contato.id }}</td>
+                                <td><a href="{% url 'detalhes_contato' contato.id %}" style="text-decoration: none">{{ contato.nome_contato }}</a></td>
+                                <td>{{ contato.sobrenome_contato }}</td>
+                                <td>{{ contato.telefone_contato }}</td>
+                                <td>{{ contato.categoria_contato }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    {% for page in contatos.paginator.page_range %}
+                        <li class="page-item {% if contatos.number == page %} active {% endif %}">
+                            <a class="page-link" 
+                                href="?page={{ page }}{% if request.GET.term is not None %}&term={{ request.GET.term }}{% endif %}">
+                                {{ page }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </div>
+    {% else %}
+        <h2>Nenhum contato adicionado</h2>
+        <p><a href="{% url 'dashboard' %}">adicionar contato</a></p>
+    {% endif %}
 {% endblock %}
