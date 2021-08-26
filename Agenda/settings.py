@@ -142,3 +142,6 @@ MESSAGE_TAGS = {
     constants.SUCCESS: 'alert alert-success',
     constants.WARNING: 'alert alert-warning',
 }
+
+
+LOGOUT_REDIRECT_URL = '/accounts/login'
