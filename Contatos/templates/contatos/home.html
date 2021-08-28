@@ -2,21 +2,42 @@
 
 {% block 'titulo' %} Agenda {% endblock %}
 
+{% block 'style' %} 
+    <style>
+        body {
+            background-color: rgba(245, 245, 245, 0.5);
+        }
+
+        .main a {
+            text-decoration: none;
+        }
+
+        .main a:hover {
+            text-decoration: underline;
+        }
+
+        tbody td { 
+            padding: 12px !important;
+        }
+    </style>
+{% endblock %}
+
 {% block 'content' %} 
     {% include 'partials/_header.html' %}
 
-    <div class="container" style="margin-top: 40px;">
-        <form method="get" action="{% url 'search_contact' %}" style="margin-bottom: 10px;">
+    <div class="container main mt-5">
+        {% include 'partials/_messages.html' %}
+
+        <form method="get" action="{% url 'search_contact' %}">
             <div class="form-group row">
                 <div class="col-12">
                     <input type="search" class="form-control" name="term"
                     value="{{ request.GET.term }}" placeholder="Digite sua pesquisa">
-                    <br>
-
-                    {% include 'partials/_messages.html' %}
                 </div>
             </div>
         </form>
+        
+        <br>
         
         {% if contatos %}
             <h2>Meus contatos</h2>
@@ -38,7 +59,7 @@
                         {% for contato in contatos %}
                             <tr>
                                 <td>{{ contato.id }}</td>
-                                <td><a href="{% url 'detalhes_contato' contato.id %}" style="text-decoration: none">{{ contato.nome_contato }}</a></td>
+                                <td><a href="{% url 'detalhes_contato' contato.id %}">{{ contato.nome_contato }}</a></td>
                                 <td>{{ contato.sobrenome_contato }}</td>
                                 <td>{{ contato.telefone_contato }}</td>
                                 <td>{{ contato.categoria_contato }}</td>
@@ -60,9 +81,9 @@
                     {% endfor %}
                 </ul>
             </nav>
-        </div>
-    {% else %}
-        <h2>Nenhum contato adicionado</h2>
-        <p><a href="{% url 'dashboard' %}">adicionar contato</a></p>
-    {% endif %}
+        {% else %}
+            <h2>{{ user.first_name }} você não tem nenhum contato adicionado</h2>
+            <p><a href="{% url 'dashboard' %}">adicionar um contato</a></p>
+        {% endif %}
+    </div>
 {% endblock %}

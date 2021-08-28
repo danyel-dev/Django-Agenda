@@ -24,8 +24,7 @@ def search_contact(request):
     term = request.GET.get('term')
     
     if not term or term is None:
-        messages.add_message(request, messages.ERROR, 'Você deixou o campo em branco, nada encontrado!')
-
+        messages.error(request, 'Você deixou o campo em branco, nada encontrado!')
         return redirect('/')
 
     campos = Concat("nome_contato", Value(" "), "sobrenome_contato")
@@ -34,12 +33,12 @@ def search_contact(request):
         nome_completo = campos
     ).filter(
         Q(nome_completo__icontains = term) | Q(telefone_contato__icontains = term),
-        mostrar_contato = True
+        mostrar_contato = True,
+        user=request.user,
     )
 
     if not contatos:
-        messages.add_message(request, messages.ERROR, 'Nenhum contato encontrado!')
-
+        messages.error(request, 'Nenhum contato encontrado!')
         return redirect('/')
 
     paginator = Paginator(contatos, 5)
