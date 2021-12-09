@@ -13,7 +13,7 @@ from .models import Contato
 def home(request):
     contatos = Contato.objects.order_by('-id').filter(mostrar_contato=True, user=request.user)
   
-    paginator = Paginator(contatos, 5)
+    paginator = Paginator(contatos, 20)
     page = request.GET.get('page')
     contatos = paginator.get_page(page)
 

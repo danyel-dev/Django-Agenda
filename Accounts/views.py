@@ -75,7 +75,7 @@ def register(request):
     user = User.objects.create_user(username=username, email=email, password=password, first_name=name, last_name=lastname)
     
     messages.success(request, 'Usuário registrado com sucesso!')
-
+    
     user.save()
     return redirect('login')
 
